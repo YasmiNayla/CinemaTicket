@@ -1,124 +1,116 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const ticketArray = [];
+$(function(){
+    $.get("http://localhost:2020/hello").then((data)=>{
+        console.log("")
+        console.log(data);
+         })
+})
 
-    // Function to store ticket data in an object and add it to the array
-    function storeTicketData() {
-        const movieSelect = document.getElementById("movieSelect");
-        const amountInput = document.getElementById("amountInput");
-        const firstNameInput = document.getElementById("firstNameInput");
-        const lastNameInput = document.getElementById("lastNameInput");
-        const phoneInput = document.getElementById("phoneInput");
-        const emailInput = document.getElementById("emailInput");
+function movieSelect() {
+    console.log("we are inside the function movieSelect()")
 
-        // Clear previous error messages
-        clearErrorMessages();
+    let html = '<select id="movieSelect"> ';
 
-        // Validate input fields
-        let isValid = true;
+    for (const movie in movies) {
+        html += "<option>" + movieSelect[movie].movie + "</option>";
+    }
+    html += "</select>";
+    document.getElementById("movieSelect").innerHTML = html;
+}
 
-        if (amountInput.value < 1) {
-            document.getElementById("amountError").innerText = "Amount must be at least 1.";
-            isValid = false;
+function getMovies() {
+    $.get("/getMoviesList", function (data, status) {
+        console.log("All movies", data);
+        movieSelect(data);
+        let html = "<table><thead><td>Name</td><td>Year</td></thead>";
+
+        for (const movie of data) {
+            html += "<tr><td>" + movie.name + "</td>" +
+                "<td>" + movie.year + "</td>";
+        }
+        html += "</table>";
+        document.getElementById("table").innerHTML = html;
+    });
+}
+
+$(function(){
+    $.get("http://localhost:2020/getStudent").then((data)=>{
+        console.log("")
+        console.log(data);
+    })
+})
+
+
+
+// Function to display a ticket in the list
+function displayTicket(ticket) {
+    const ticketList = document.getElementById("ticketList");
+    const listItem = document.createElement("li");
+
+    const ticketInfo = `Movie: ${ticket.movie},        
+                               Amount: ${ticket.amount},
+                               FirstName: ${ticket.firstName},     
+                               LastName: ${ticket.lastName},
+                               Phone: ${ticket.phone},
+                               Email: ${ticket.email}`;
+
+    listItem.textContent = ticketInfo;
+    ticketList.appendChild(listItem);
+    console.log(ticketInfo)
+}
+
+function removeAllTickets() {
+    ticket.length = 0; // Clear the array
+    document.getElementById("ticketList").innerHTML = ""; // Clear the list
+}
+
+function clearErrorMessages() {
+    const errorMessages = document.getElementsByClassName("error-message");
+    for (let i = 0; i < errorMessages.length; i++) {
+        errorMessages[i].innerText = "";
+    }
+}
+
+function clearInputFields() {
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach((input) => {
+        input.value = "";
+    });
+}
+
+
+// Function to store ticket data in an object and add it to the array
+
+function formatData(Tickets) {
+    let out = "<table><tr><th>Movie</th><th>Amount</th><th>Name</th><th>Surname</th><th>phoneNr</th<th>Email</th></tr>";
+    for (const Ticket of Tickets) {
+        out += "<tr><td>", "</td></tr>";
+    }
+}
+
+function getAllTickets() {
+    $.get("http://localhost:2020/GetAllListing", function (data) {
+        console.log(data);
+        for (let i = 0; i < data.length; i++) {
+            console.log(data[i].id);
+            console.log(data[i].movie);
+            console.log(data[i].amount);
+            console.log(data[i].firstName);
+            console.log(data[i].lastName);
+            console.log(data[i].phone);
+            console.log(data[i].email);
         }
 
-        const firstNameRegex = /^[a-zA-Z]+(\s[a-zA-Z]+)?$/;
-        if (!firstNameRegex.test(lastNameInput.value)) {
-            document.getElementById("firstNameError").innerText = "Please enter your first name.";
-            isValid = false;
-        }
-
-        const lastNameRegex = /^[a-zA-Z]+(\s[a-zA-Z]+)?$/;
-        if (!lastNameRegex.test(lastNameInput.value)) {
-            document.getElementById("lastNameError").innerText = "Please enter your last name.";
-            isValid = false;
-        }
-
-        if (!isValidPhoneNumber(phoneInput.value)) {
-            document.getElementById("phoneError").innerText = "Please enter a valid 8-digit phone number.";
-            isValid = false;
-        }
-
-        if (!isValidEmail(emailInput.value)) {
-            document.getElementById("emailError").innerText = "Please enter a valid email address.";
-            isValid = false;
-        }
-
-        // If any validation fails, return
-        if (!isValid) {
-            return;
-        }
-
-        // Create ticket object
-        const ticket = {
-            movie: movieSelect.value,
-            amount: parseInt(amountInput.value),
-            firstName: firstNameInput.value,
-            lastName: lastNameInput.value,
-            phone: phoneInput.value,
-            email: emailInput.value,
-        };
-
-        // Add ticket to the array
-        ticketArray.push(ticket);
-
-        // Display the ticket in the list
-        displayTicket(ticket);
-
-        // Clear input fields
-        clearInputFields();
-    }
-
-    // Function to display a ticket in the list
-    function displayTicket(ticket) {
-        const ticketList = document.getElementById("ticketList");
-        const listItem = document.createElement("li");
-
-        const ticketInfo = `Movie: ${ticket.movie},        
-                                    Amount: ${ticket.amount},
-                                    FirstName: ${ticket.firstName},     
-                                    LastName: ${ticket.lastName},
-                                    Phone: ${ticket.phone},
-                                    Email: ${ticket.email}`;
-
-        listItem.textContent = ticketInfo;
-        ticketList.appendChild(listItem);
-        console.log(ticketInfo)
-    }
-
-    function removeAllTickets() {
-        ticketArray.length = 0; // Clear the array
-        document.getElementById("ticketList").innerHTML = ""; // Clear the list
-    }
-
-    function clearErrorMessages() {
-        const errorMessages = document.getElementsByClassName("error-message");
-        for (let i = 0; i < errorMessages.length; i++) {
-            errorMessages[i].innerText = "";
-        }
-    }
-
-    function clearInputFields() {
-        const inputs = document.querySelectorAll("input");
-        inputs.forEach((input) => {
-            input.value = "";
-        });
-    }
+        // need to read the array of objects that we received
+        let dynamicHtml = "<ul>";
+        data.forEach(function (ticket) {
+            // dynamically create html around the list of object
+            dynamicHtml += "<li>" + ticket.id + " " + ticket.movie + " " + ticket.amount + " " + ticket.firstName + " " + ticket.phone + " " + ticket.email + "</li>"
+        })
+        dynamicHtml += "</ul>"
+        document.getElementById("TicketList").innerHTML = dynamicHtml;
+    })
+}
 
 
 
-    function isValidEmail(email) {
-        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-        return emailRegex.test(email);
-    }
 
-
-    function isValidPhoneNumber(phone) {
-        const phoneRegex = /^\d{8}$/;
-        return phoneRegex.test(phone);
-    }
-
-    document.getElementById("buyButton").addEventListener("click", storeTicketData);
-
-    // Event listener for the Remove All Tickets button
-    document.getElementById("removeAllButton").addEventListener("click", removeAllTickets);
-});

@@ -1,0 +1,29 @@
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    color: lightcoral;
+}
+button {
+    background-color: lightseagreen;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    border-radius: 20%;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+
+}
+.movieShop{
+    display: flex;
+    margin: 10REM;
+    align-content: center;
+    font-weight: bolder;
+    border: solid;
+    border-inline-color: lightcoral;
+    width: 22%;
+}
