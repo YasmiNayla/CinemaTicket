@@ -54,13 +54,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Create ticket object
         const Ticket = {
-            id: $("#id"),
-            movie: $("#movieSelect").val(),
-            amount: $("#amountInput").val(),
-            firstName: $("#firstNameInput").val(),
-            lastName: $("#lastNameInput").val(),
-            phone: $("#phoneInput").val(),
-            email: $("#emailInput").val(),
+            movie: movieSelect.value,
+            amount: parseInt(amountInput.value),
+            firstName: firstNameInput.value,
+            lastName: lastNameInput.value,
+            phone: phoneInput.value,
+            email: emailInput.value,
+        };
+            //id: $("#id"),
+            //movie: $("#movieSelect").val(),
+            //amount: $("#amountInput").val(),
+            //firstName: $("#firstNameInput").val(),
+            //lastName: $("#lastNameInput").val(),
+            //phone: $("#phoneInput").val(),
+            //email: $("#emailInput").val(),
         };
 
 // Add ticket to the array
@@ -71,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Clear input fields
         clearInputFields();
-    }
 
 //Store tickets that were bought in one event
     document.getElementById("buyTicket").addEventListener("click", storeTicketData);

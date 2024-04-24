@@ -54,7 +54,7 @@ public class TicketController {
     public void deleteAllTickets(){
         rep.deleteAllTickets();
     }
+ }
 
-}
 
 

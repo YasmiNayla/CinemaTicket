@@ -27,13 +27,13 @@ public class TicketRepository {
     }
 
     // wondering if i need to make own repository file for movies for this to work.
-    public List<Movie> getMovieList() {
+    public List<Movie> getMoviesList() {
         String sql = "SELECT * FROM Movie";
         List<Movie> movies = db.query(sql, new BeanPropertyRowMapper<>(Movie.class));
         return movies;
     }
 
-    public void getTicketById(int id) {
+    public Ticket getTicketById(int id) {
         String sql = "SELECT * FROM Ticket WHERE ID=?";
         List<Ticket> ticket = db.query(sql, new BeanPropertyRowMapper<>(Ticket.class),id);
         return ticket.get(0);
