@@ -1,15 +1,26 @@
 function valAndStoreTicket(){
+    const movieOK = movieSelectVal($("#movieSelect").val())
     const amountOK = amountVal($("#amountInput").val());
     const nameOK = firstNameVal($("#firstNameInput").val());
     const lastNameOK = lastNameVal($("#lastNameInput").val());
     const phoneOK = phoneVal($("#phoneInput").val());
     const emailOK = emailVal($("#emailInput").val());
-    if (amountOK && nameOK && lastNameOK && phoneOK && emailOK){
+    if (movieOK && amountOK && nameOK && lastNameOK && phoneOK && emailOK){
         regTicket();
+    }
+
+    if(filmnavn === null || antall === "" || fornavn === "" || etternavn === "" || telefonnr === "" || email === ""){
+        $("#amountError").text('"Invalid! How many tickets did you want?"');
+        $("#feilMeldingfornavn").text('"Please, write a valid name..."');
+        $("#feilMeldingetternavn").text('"Please, write a valid surname"');
+        $("#feilMeldingtlfnr").text('"Please, write a valid phone Nr (8 digits)"');
+        $("#feilMeldingemail").text('"Please, write a valid email"');
+        console.log("OK");
+        return;
     }
 }
 
-function regTicket(){
+function setTicket(){
     const Ticket = {
         id: $("#id"),
         movie: $("#movieSelect").val(),
@@ -21,7 +32,7 @@ function regTicket(){
     };
     $.ajax({
         type: 'POST',
-        url: "http://localhost:2020/regTicket",
+        url: "http://localhost:8080/setTicket",
         async: true,
         data: JSON.stringify(Ticket),
         contentType: "application/json",

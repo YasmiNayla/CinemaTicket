@@ -1,21 +1,78 @@
-$(function(){
-    $.get("http://localhost:2020/hello").then((data)=>{
+$(function () {               //test in console functioning of program
+    $.get("http://localhost:8080/hello").then((data) => {
         console.log("")
         console.log(data);
-         })
+    })
 })
 
-function movieSelect() {
-    console.log("we are inside the function movieSelect()")
+$(function () {
+    getAllTickets();
+});
 
-    let html = '<select id="movieSelect"> ';
+$(function () {
+    $.get("http://localhost:8080/getAllTickets").then((data) => {
+        console.log("")
+        console.log(data);
+    })
+})
 
-    for (const movie in movies) {
-        html += "<option>" + movieSelect[movie].movie + "</option>";
-    }
-    html += "</select>";
-    document.getElementById("movieSelect").innerHTML = html;
+// Take info from input, inject it into setTicket PostMapping
+function valAndStoreTicket() {
+    const Ticket = {
+        movie: $("#movieSelect").val(),
+        amount: $("#amountInput").val(),
+        firstName: $("#firstNameInput").val(),
+        lastName: $("#lastNameInput").val(),
+        phone: $("#phoneInput").val(),
+        email: $("#emailInput").val()
+    };
+
+    $.post("/setTicket", Ticket, function () {
+        getAllTickets();
+    });
+
+    /// now restoring input fields to be clear
+    $("#movieSelect").val("");
+    $("#amountInput").val("");
+    $("#firstNameInput").val("");
+    $("#lastNameInput").val("");
+    $("#phoneInput").val("");
+    $("#emailInput").val("");
+
 }
+
+// streams back from server the storaged tickets
+function getAllTickets() {
+    $.get("/getAllTickets", function (data) {
+        formatData(data);
+    });
+}
+
+//display table of movies
+function formatData() {
+    let ut = "<table class='table table-striped table-bordered'><tr>" +
+        "<th>Movie</th>" +
+        "<th>Amount</th>" +
+        "<th>Name</th>" +
+        "<th>Last Name</th>" +
+        "<th>Phone</th>" +
+        "<th>Email</th>" +
+        "<th></th><th></th>" +
+        "</tr>";
+    for (const i of tickets) {
+        ut += "<tr><td>" + i.movie + "</td><td>" + i.amount + "</td><td>" + i.firstName + "</td>" +
+            "<td>" + i.lastName + "</td><td>" + i.phone + "</td><td>" + i.email + "</td>" +
+            "<td><button class='buyTicket' onclick='valAndStoreTicket(" + i.id + ")'>Buy Ticket</button> </td>" +
+            "<td><button class='removeAllTickets' onclick='removeEventListener(" + i.id + ")'>Remove All Tickets</button></td></tr>";
+    }
+    out += "</table>";
+    $("#movieTicket").html(ut);
+}
+
+
+$(function () {
+    getMovies();
+});
 
 function getMovies() {
     $.get("/getMoviesList", function (data, status) {
@@ -32,84 +89,55 @@ function getMovies() {
     });
 }
 
-$(function(){
-    $.get("http://localhost:2020/getStudent").then((data)=>{
-        console.log("")
-        console.log(data);
-    })
-})
-
-
-
-// Function to display a ticket in the list
-function displayTicket(ticket) {
-    const ticketList = document.getElementById("ticketList");
-    const listItem = document.createElement("li");
-
-    const ticketInfo = `Movie: ${ticket.movie},        
-                               Amount: ${ticket.amount},
-                               FirstName: ${ticket.firstName},     
-                               LastName: ${ticket.lastName},
-                               Phone: ${ticket.phone},
-                               Email: ${ticket.email}`;
-
-    listItem.textContent = ticketInfo;
-    ticketList.appendChild(listItem);
-    console.log(ticketInfo)
-}
-
-function removeAllTickets() {
-    ticket.length = 0; // Clear the array
-    document.getElementById("ticketList").innerHTML = ""; // Clear the list
-}
-
-function clearErrorMessages() {
-    const errorMessages = document.getElementsByClassName("error-message");
-    for (let i = 0; i < errorMessages.length; i++) {
-        errorMessages[i].innerText = "";
+function chooseMovie(movies) {
+    let ut = "<select id="
+    movieSelect
+    ">";
+    for (const movie of movies) {
+        console.log("Movie chosen is: " + movie)
+        ut += "</select>";
+        $("#movieSelect").html(ut);
+        console.log(ut)
     }
-}
 
-function clearInputFields() {
-    const inputs = document.querySelectorAll("input");
-    inputs.forEach((input) => {
-        input.value = "";
-    });
-}
-
-
-// Function to store ticket data in an object and add it to the array
-
-function formatData(Tickets) {
-    let out = "<table><tr><th>Movie</th><th>Amount</th><th>Name</th><th>Surname</th><th>phoneNr</th<th>Email</th></tr>";
-    for (const Ticket of Tickets) {
-        out += "<tr><td>", "</td></tr>";
-    }
-}
-
-function getAllTickets() {
-    $.get("http://localhost:2020/GetAllListing", function (data) {
-        console.log(data);
-        for (let i = 0; i < data.length; i++) {
-            console.log(data[i].id);
-            console.log(data[i].movie);
-            console.log(data[i].amount);
-            console.log(data[i].firstName);
-            console.log(data[i].lastName);
-            console.log(data[i].phone);
-            console.log(data[i].email);
-        }
-
-        // need to read the array of objects that we received
-        let dynamicHtml = "<ul>";
-        data.forEach(function (ticket) {
-            // dynamically create html around the list of object
-            dynamicHtml += "<li>" + ticket.id + " " + ticket.movie + " " + ticket.amount + " " + ticket.firstName + " " + ticket.phone + " " + ticket.email + "</li>"
+// function for precision deletion by ID
+    function deleteById(id) {
+        $.get("/deleteById?id=" + id, function () {
+            window.location.href = 'index.html';
         })
-        dynamicHtml += "</ul>"
-        document.getElementById("TicketList").innerHTML = dynamicHtml;
-    })
-}
+    }
+
+// delete all tickets from history
+    function deleteAllTickets() {
+        $.get("/deleteAllTickets", function () {
+            getAllTickets();
+        })
+    }
+
+
+    function getAllTickets() {
+        $.get("http://localhost:8080/GetAllTickets", function (data) {
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                console.log(data[i].id);
+                console.log(data[i].movie);
+                console.log(data[i].amount);
+                console.log(data[i].firstName);
+                console.log(data[i].lastName);
+                console.log(data[i].phone);
+                console.log(data[i].email);
+            }
+
+            // need to read the array of objects that we received
+            let dynamicHtml = "<ul>";
+            data.forEach(function (Ticket) {
+                // dynamically create html around the list of object
+                dynamicHtml += "<li>" + Ticket.id + " " + Ticket.movie + " " + Ticket.amount + " " + Ticket.firstName + " " + Ticket.phone + " " + Ticket.email + "</li>"
+            })
+            dynamicHtml += "</ul>"
+            document.getElementById("tickets").innerHTML = dynamicHtml;
+        })
+    }
 
 
 

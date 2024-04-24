@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const ticket = [];
+    const Ticket = [];
 
     function storeTicketData() {
         const movieSelect = document.getElementById("movieSelect");
@@ -46,40 +46,41 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         }
 
+
 // If any input fails, return error message
         if (!isValid) {
             return errorMessage;
         }
 
 // Create ticket object
-            const TicketObject = {
-                id: $("#id"),
-                movie: $("#movieSelect").val(),
-                amount: $("#amountInput").val(),
-                firstName: $("#firstNameInput").val(),
-                lastName: $("#lastNameInput").val(),
-                phone: $("#phoneInput").val(),
-                email: $("#emailInput").val(),
-            };
+        const Ticket = {
+            id: $("#id"),
+            movie: $("#movieSelect").val(),
+            amount: $("#amountInput").val(),
+            firstName: $("#firstNameInput").val(),
+            lastName: $("#lastNameInput").val(),
+            phone: $("#phoneInput").val(),
+            email: $("#emailInput").val(),
+        };
 
 // Add ticket to the array
-            ticket.push(TicketObject);
+        Ticket.push(Ticket);
 
 // Display the ticket in the list
-            displayTicket(TicketObject);
+        displayTicket(Ticket);
 
 // Clear input fields
-            clearInputFields();
-        }
+        clearInputFields();
+    }
 
 //Store tickets that were bought in one event
-        document.getElementById("buyTicket").addEventListener("click", storeTicketData);
+    document.getElementById("buyTicket").addEventListener("click", storeTicketData);
 
 
 // Event listener for the Remove All Tickets button
-        document.getElementById("removeAllButton").addEventListener("click", removeAllTickets);
+    document.getElementById("removeAllButton").addEventListener("click", removeEventListener);
 
-    function errorMessage () {
+    function errorMessage() {
         const amountError = document.getElementById('amountError');
         const firstNameError = document.getElementById('firstNameError');
         const lastNameError = document.getElementById('lastNameError');
@@ -96,5 +97,13 @@ document.addEventListener("DOMContentLoaded", function () {
         // Source palette: https://coolors.co/800000-cc0000-f50000-ff4747-ff7070
     }
 
-    });
+    $.post("/storage ", TicketObject, function () {
+    })
+    let biletList = {}
+    $.get("/hentBiletter", function (data) {
+        biletList = data;
+
+        window.location.href = "/biletTabel.html";
+    })
+});
 

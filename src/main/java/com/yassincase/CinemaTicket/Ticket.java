@@ -2,9 +2,6 @@ package com.yassincase.CinemaTicket;
 
 public class Ticket {
 
-    public class Ticket {
-
-        private static int nextId = 1; // Static counter to assign new IDs
         private int id;
         private String movieSelect;
         private Integer amount;
@@ -16,9 +13,9 @@ public class Ticket {
         public Ticket() {
         }
 
-        public Ticket(Integer id, String movieSelect, Integer amount, String firstname, String lastname, Integer phone, String email) {
+        public Ticket(String movieSelect, Integer amount, String firstname, String lastname, Integer phone, String email) {
 
-            this.id = nextId++;
+            this.id = id;
             this.movieSelect = movieSelect;
             this.amount = amount;
             this.firstName = firstname;
@@ -27,14 +24,9 @@ public class Ticket {
             this.email = email;
         }
 
-        public int getId() {
-            return id;
-        }
+    public int getId() { return id; }
 
-        public void setId(int id) {
-            this.id = id;
-        }
-
+        public void setId(int id) { this.id = id; }
         public String getMovieSelect() {
             return movieSelect;
         }
@@ -83,17 +75,16 @@ public class Ticket {
             this.email = email;
         }
 
-        @Override
-        public String toString() {
-            return "Ticket{" +
-                    "id='" + id + '\'' +
-                    "movieSelect='" + movieSelect + '\'' +
-                    ", amount=" + amount +
-                    ", firstName='" + firstName + '\'' +
-                    ", lastName='" + lastName + '\'' +
-                    ", phone=" + phone +
-                    ", email='" + email + '\'' +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id='" + id + '\'' +
+                "movieSelect='" + movieSelect + '\'' +
+                ", amount=" + amount +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone=" + phone +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

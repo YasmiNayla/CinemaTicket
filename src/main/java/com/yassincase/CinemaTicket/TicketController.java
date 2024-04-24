@@ -1,70 +1,60 @@
 package com.yassincase.CinemaTicket;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 public class TicketController {
 
-    List<Ticket> ticketListing = new ArrayList<>();
+ List<Ticket> tickets = new ArrayList<>();
 
+    @Autowired
+    private TicketRepository rep;
 
     // A test Endpoint to check if system is working
     @GetMapping("/Hello")
     public String Hello() {
+
         return "God Day Señorita/-to :D Wishing you a good day";
     }
 
-    @GetMapping("/getTicket")
-    public Ticket getTicket() {
-        if (!ticketListing.isEmpty()) {
-            return ticketListing.get(0);
-        }
-        return "There is no tickets to see";
-    }
-
     // save a registered ticket purchase into the array of tickets listing
-    @PostMapping("/regTicket")
+    @PostMapping("/setTicket")
     public String setTicket(Ticket ticket){
-        System.out.println(ticket);
-        ticketListing.add(ticket);
-        return "Ticket is now registered.";
+        rep.setTicket(ticket);
+        return "Ticket has been saved";
     }
 
     // see all tickets from ticket listing array
-    @GetMapping("/GetAllTickets")
-    public List<Ticket> getAllTickets() {
-        return ticketListing;
+    @GetMapping("/getAllTickets")
+    public List<Ticket> getAllTickets() throws SQLException {
+        return rep.getAllTickets();
     }
 
+    //handpicking a ticket by ID
     @GetMapping("/getTicketById")
-    public Ticket getTicketById(@RequestParam Integer id){
-
-        return ticketListing.get(id);
+    public void getTicketById(int id){
+        rep.getTicketById(id);
     }
 
-    @PostMapping("/setListOfTickets")
-    public String setTickets(@RequestBody ArrayList<Ticket> ticket){
-
-        System.out.println(ticketListing);
-        ticketListing.addAll(ticket);
-        System.out.println(ticket);
-
-        return "Objects received";
+    //delete singular and specific ticket by Id
+    @PostMapping("/deleteById")
+    public void deleteById(int id){
+        rep.deleteById(id);
     }
 
-    @DeleteMapping("/deleteTicketById")
-    public ResponseEntity<String> deleteTicket(@RequestParam Integer id) {
-        if (id >= 0 && id <= ticketListing.size()){
-            ticketListing.remove(id);
-            return "Ticket has been deleted";
-        }
+    // delete all tickets
+    @DeleteMapping("/deleteAllTickets")
+    public void deleteAllTickets(){
+        rep.deleteAllTickets();
     }
 
-
-    }
+}
 
 
