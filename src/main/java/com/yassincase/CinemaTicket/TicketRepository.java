@@ -17,11 +17,10 @@ public class TicketRepository {
 
     public void setTicket(Ticket innTicket) {
         String sql = "INSERT INTO Ticket (id, movie, amount, firstname, lastname, phone, email) VALUES(?, ?, ?, ?, ?, ?)";
-        db.update(sql.toString(), innTicket.getId(), innTicket.getMovieSelect(), innTicket.getAmount(), innTicket.getFirstName(), innTicket.getLastName(), innTicket.getPhone(), innTicket.getEmail());
+        db.update(sql, innTicket.getId(), innTicket.getMovieSelect(), innTicket.getAmount(), innTicket.getFirstName(), innTicket.getLastName(), innTicket.getPhone(), innTicket.getEmail());
     }
 
     public List<Ticket> getAllTickets() {
-
         String sql = "SELECT * FROM Ticket ORDER BY LASTNAME";
         List<Ticket> tickets = db.query(sql, new BeanPropertyRowMapper<>(Ticket.class));
         return tickets;
@@ -29,19 +28,19 @@ public class TicketRepository {
 
     // wondering if i need to make own repository file for movies for this to work.
     public List<Movie> getMovieList() {
-        Stringsql = "SELECT * FROM Movie";
-        List<Movie> movieList = db.query(sql, new BeanPropertyRowMapper<>(Movie.class));
-        return moviesList;
+        String sql = "SELECT * FROM Movie";
+        List<Movie> movies = db.query(sql, new BeanPropertyRowMapper<>(Movie.class));
+        return movies;
     }
 
     public void getTicketById(int id) {
-        String sql = "SELECT * FROM Ticket WHERE ID=%";
-        List<Ticket> ticket = db.query(sql.new BeanPropertyRowMapper(Ticket.class), id);
+        String sql = "SELECT * FROM Ticket WHERE ID=?";
+        List<Ticket> ticket = db.query(sql, new BeanPropertyRowMapper<>(Ticket.class),id);
         return ticket.get(0);
     }
 
     public void deleteById(int id) {
-        String sql = "DELETE FROM Ticket WHERE ID=%";
+        String sql = "DELETE FROM Ticket WHERE ID=?";
         db.update(sql, id);
     }
 

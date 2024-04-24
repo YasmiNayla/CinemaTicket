@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const Ticket = [];
+  //  const Ticket = [];
 
     function storeTicketData() {
         const movieSelect = document.getElementById("movieSelect");

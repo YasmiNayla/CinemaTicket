@@ -33,7 +33,7 @@ public class TicketController {
 
     // see all tickets from ticket listing array
     @GetMapping("/getAllTickets")
-    public List<Ticket> getAllTickets() throws SQLException {
+    public List<Ticket> getAllTickets() {
         return rep.getAllTickets();
     }
 

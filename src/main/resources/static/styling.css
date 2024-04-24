@@ -1,13 +1,50 @@
+html {
+    background: url(images/BackgroundTicket.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+/* source code: https://css-tricks.com/perfect-full-page-background-image/ */
 body {
+    color: white;
+}
+#ContainerForm {
     font-family: sans-serif;
+    font-size: 24px;
+    font-palette: white;
+    margin: 25px;
+    align-content: center;
 }
 
 h1 {
-    color: lightcoral;
+    color: #fccaca;
+    font-size: 44px;
+    border-bottom-style: dashed;
 }
+
+.childForm{
+    position: absolute;
+    align-items: center;
+}
+
+.movieTicket{
+    background-color: #132d44;
+    display: list-item;
+    text-align: center;
+    padding: 2rem;
+    margin: 5rem;
+    font-weight: bolder;
+    border: solid;
+    border-inline-color: black;
+    border-radius: 1rem;
+    width: 40%;
+}
+
 button {
-    background-color: lightseagreen;
-    border: 1rem;
+
+    background-color: #560711;
+    border: 3px;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -17,18 +54,4 @@ button {
     font-size: 16px;
     margin: 4px 2px;
 
-}
-.movieTicket{
-    background-color: lightsteelblue;
-    display: list-item;
-    text-align: center;
-    text-decoration-color: darkblue;
-    padding: 2rem;
-    margin: 5rem;
-    align-content: center;
-    font-weight: bolder;
-    border: solid;
-    border-inline-color: black;
-    border-radius: 1rem;
-    width: 22%;
 }
