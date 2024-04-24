@@ -1,21 +1,27 @@
 html {
     background: url(images/BackgroundTicket.png) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
 }
 /* source code: https://css-tricks.com/perfect-full-page-background-image/ */
+/* Picture generated with: "Canva-AI image generator" */
 
 body {
-    color: white;
+    display: block;
+    margin-left: 80px ;
+}
+
+#title {
+    align-items: flex-start;
+    backdrop-filter: blur(88);
 }
 #ContainerForm {
     font-family: sans-serif;
-    font-size: 24px;
-    font-palette: white;
+    font-size: 22px;
+    color: whitesmoke;
     margin: 25px;
     align-content: center;
+    justify-content: space-between;
+    position: absolute;
 }
 
 h1 {
@@ -29,7 +35,7 @@ h1 {
     align-items: center;
 }
 
-.movieTicket{
+.ticketForm{
     background-color: #132d44;
     display: list-item;
     text-align: center;
@@ -39,20 +45,20 @@ h1 {
     border: solid;
     border-inline-color: black;
     border-radius: 1rem;
-    width: 40%;
+    width: 50%;
 }
 
-button {
+button, #getTicketList {
 
     background-color: #560711;
     border: 3px;
     color: white;
-    padding: 15px 32px;
+    padding: 20px 32px;
     text-align: center;
     border-radius: 2rem;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 15px 10px;
 
 }

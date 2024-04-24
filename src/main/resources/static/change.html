@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update and change tickets</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src=TicketStore.js"></script>
+</head>
+<body>
+
+<div class="TicketManipulation">
+    <section>
+<h2> All Tickets </h2>
+<button id="changeTickets" onclick="getAllTickets()">Upload Tickets</button>
+<h3> List of Tickets </h3>
+<p id="ticketsList"></p>
+    </section>
+
+<div style="border: solid 1px; width:250px; text-align: center">
+  <h2> Modify Ticket </h2>
+
+  <ul id="id2">ID: </ul>
+
+    <label>Movie:</label><br>
+    <input type="text" id="movieEdit"><br>
+
+  <label>Amount:</label><br>
+  <input type="number" id="amountEdit"><br>
+
+  <label>First Name</label><br>
+  <input type="text" id="firstNameEdit"><br>
+
+    <label>Last Name</label><br>
+    <input type="text" id="lastNameEdit"><br>
+
+  <label>Phone Nr</label><br>
+  <input type="number" id="phoneEdit"><br>
+
+    <label>Email</label><br>
+    <input type="text" id="emailEdit"><br>
+  <br>
+
+  <button onclick="saveChangesDb()">Save</button>
+  <br>
+
+  <button class="deleteAllButton" onclick="deleteAllTickets()">Delete All Tickets</button>
+</div>
+
+</body>
+</html>

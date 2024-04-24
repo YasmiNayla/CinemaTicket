@@ -1,26 +1,20 @@
-function valAndStoreTicket(){
-    const movieOK = movieSelectVal($("#movieSelect").val())
-    const amountOK = amountVal($("#amountInput").val());
-    const nameOK = firstNameVal($("#firstNameInput").val());
-    const lastNameOK = lastNameVal($("#lastNameInput").val());
-    const phoneOK = phoneVal($("#phoneInput").val());
-    const emailOK = emailVal($("#emailInput").val());
-    if (movieOK && amountOK && nameOK && lastNameOK && phoneOK && emailOK){
-        regTicket();
+function saveChangesDb(){
+    ediTicket = {
+        "id": document.getElementById("idEdit").innerHTML,
+        "movie": document.getElementById("movieEdit").value,
+        "amount": document.getElementById("amountEdit").value,
+        "firstName": document.getElementById("firstNameEdit").value
+        "lastName": document.getElementById("lastNameEdit").value,
+        "phone": document.getElementById("phoneEdit").value,
+        "email": document.getElementById("emailEdit").value
     }
+    console.log( document.getElementById("id").value);
+    console.log(ediTicket); //debug advise from Cosmin
+    $.post("http://localhost:8080/updateTicket",ediTicket, function (data){})
 
-    if(filmnavn === null || antall === "" || fornavn === "" || etternavn === "" || telefonnr === "" || email === ""){
-        $("#amountError").text('"Invalid! How many tickets did you want?"');
-        $("#feilMeldingfornavn").text('"Please, write a valid name..."');
-        $("#feilMeldingetternavn").text('"Please, write a valid surname"');
-        $("#feilMeldingtlfnr").text('"Please, write a valid phone Nr (8 digits)"');
-        $("#feilMeldingemail").text('"Please, write a valid email"');
-        console.log("OK");
-        return;
-    }
 }
 
-function setTicket(){
+function setTicket() {
     const Ticket = {
         id: $("#id"),
         movie: $("#movieSelect").val(),
@@ -45,3 +39,17 @@ function setTicket(){
         }
     });
 }
+    function updateStudentInDb(){
+        student = {
+            "id": document.getElementById("idStud").innerHTML,
+            "name": document.getElementById("nameEdit").value,
+            "age": document.getElementById("ageEdit").value,
+            "university": document.getElementById("universityEdit").value
+        }
+        console.log( document.getElementById("idStud").value);
+        console.log(student); //good for debugging in case the elements from student are no
+        $.post("http://localhost:8080/updateStudent",student, function (data){})
+
+    }
+
+

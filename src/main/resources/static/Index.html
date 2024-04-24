@@ -15,67 +15,68 @@
 
 <body>
 <div id="ContainerForm">
-    <!-- <img class="background" src="Images/BackgroundTicket.png" alt="cinemaView"/> -->
-    <h1>Ordering Cinema Tickets</h1>
-    <div class="childForm">
-        <div class="movieTicket">
 
-            <input type="hidden" id="id">
-
-            <label for="movieSelect">Select Movie:</label>
-            <select id="movieSelect" required>
-                <option>Ready Player One</option>
-                <option>Avatar I</option>
-                <option>Avatar II</option>
-                <option>The Joker</option>
-                <option>The Joker II</option>
-                <option>The Matrix</option>
-                <option>Matrix Reloaded</option>
-                <option>Matrix Revolutions</option>
-                <option>The Matrix Resurrections</option>
-            </select><br>
-            <br>
-
-            <label for="amountInput">Amount:</label>
-            <input type="number" id="amountInput" min="1" required onchange="amountVal(this.value)"/>
-            <!--<p id="amountError" class="error-message"></p> -->
-            <span id="amountError" style="color: rgb(128, 0, 0)"></span><br>
-
-
-            <label for="firstNameInput">First Name:</label>
-            <input type="text" id="firstNameInput" required onchange="firstNameVal(this.value)"/>
-            <!-- <p id="firstNameError" class="error-message"></p> -->
-            <span id="firstNameError" style="color: rgb(204, 0, 0)"></span><br>
-
-            <label for="lastNameInput">Last Name:</label>
-            <input type="text" id="lastNameInput" required onchange="lastNameVal(this.value)"/>
-            <!-- <p id="lastNameError" class="error-message" style></p> -->
-            <span id="lastNameError" style="color: rgb(245, 0, 0)"></span><br>
-
-            <label for="phoneInput">Phone Number:</label>
-            <input type="tlf" id="phoneInput" pattern="[0-9]{10}" required onchange="phoneVal(this.value)"/>
-            <!-- <p id="phoneError" class="error-message"></p> -->
-            <span id="phoneError" style="color: rgb(255, 71, 71)"></span><br>
-
-            <label for="emailInput">Email:</label>
-            <input type="email" id="emailInput" required onchange="emailVal(this.value)"/>
-            <!-- <p id="emailError" class="error-message"></p><br> -->
-            <span id="emailError" style="color: rgb(255, 112, 112)"></span><br>
-
-            <button type="button" class="buyButton" onclick="valAndStoreTicket">Buy Ticket</button>
-            <br><br>
-        </div>
-
-    <div class="finalStep">
-        <section>
-            <h2>All Tickets</h2>
-            <ul id="ticketList"></ul>
-            <br>
-
-            <button class="removeAllButton" onclick="removeEventListener()">Remove All Tickets</button>
-        </section>
+    <div id="title">
+        <h1>Ordering Cinema Tickets</h1>
     </div>
-</div>
+
+        <div class="childForm">
+
+            <div class="ticketForm">
+
+                <input type="hidden" id="id">
+
+                    <label for="movieSelect">Select Movie:</label><br>
+                    <select id="movieSelect" required onclick="chooseMovieInput()">
+                        <option>Ready Player One</option>
+                        <option>Avatar I</option>
+                        <option>Avatar II</option>
+                        <option>The Joker</option>
+                        <option>The Joker II</option>
+                        <option>The Matrix</option>
+                        <option>Matrix Reloaded</option>
+                        <option>Matrix Revolutions</option>
+                        <option>The Matrix Resurrections</option>
+                    </select><br><br>
+
+
+                    <label for="amountInput">Amount:</label><br>
+                    <input type="text" id="amountInput" required min="1" onchange="amountVal(this.value)">
+                    <span id="amountError" style="color: rgb(128, 0, 0)"></span><br><br>
+
+                    <label for="firstNameInput">First Name:</label><br>
+                    <input type="text" id="firstNameInput" placeholder="name" required
+                           onchange="firstNameVal(this.value)">
+                    <span id="firstNameError" style="color: rgb(204, 0, 0)"></span><br><br>
+
+                    <label for="lastNameInput">Last Name:</label><br>
+                    <input type="text" id="lastNameInput" placeholder="surname" required
+                           onchange="lastNameVal(this.value)">
+                    <span id="lastNameError" style="color: rgb(245, 0, 0)"></span><br><br>
+
+                    <label for="phoneInput">Phone Nr:</label><br>
+                    <input type="number" id="phoneInput" pattern="[0-9]{10}" required onchange="phoneVal(this.value)">
+                    <span id="phoneError" style="color: rgb(255, 71, 71)"></span><br><br>
+
+                    <label for="emailInput">Email:</label><br>
+                    <input type="email" id="emailInput" placeholder="example@example.com" required
+                           onchange="emailVal(this.value)">
+                    <span id="emailError" style="color: rgb(255, 112, 112)"></span><br><br>
+
+                    <button type="button" class="buyButton" onclick="valAndSendTicket()">Buy Ticket</button>
+            </div>
+
+
+     <div class="DBTicketsManipulation">
+        <h2>All Tickets</h2>
+
+        <button id="getTicketList" onclick="getAllTickets()">View Tickets</button><br>
+
+
+        <button class="removeAllButton" onclick="removeEventListener()">Remove All</button>
+     </div>
+
+    </div>
 </div>
 
 </body>
