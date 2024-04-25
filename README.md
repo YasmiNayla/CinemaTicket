@@ -4,6 +4,8 @@ OsloMet username: yagar3121
 
 GitHub username: YasmiNayla
 
+YoutubeVideo Link: https://www.youtube.com/watch?v=l88smfUV8gk
+
 GitHub Repository URL: https://github.com/YasmiNayla/CinemaTicket.Oblig3.git
 
 # CinemaTicket.Oblig3
