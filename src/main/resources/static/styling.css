@@ -16,6 +16,20 @@ body {
     backdrop-filter: blur(88);
     color: #fccaca;
 }
+
+#movieTicket {
+    background-color: #0f2334;
+    display: list-item;
+    text-align: center;
+    padding: 2rem;
+    margin: 5rem;
+    font-weight: bolder;
+    border: solid;
+    border-inline-color: black;
+    border-radius: 1rem;
+    width: 50%;
+}
+
 .ContainerForm {
     font-family: sans-serif;
     font-size: 22px;
@@ -31,21 +45,7 @@ body {
     align-items: center;
 }
 
-#movieTicket {
-    background-color: #0f2334;
-    display: list-item;
-    text-align: center;
-    padding: 2rem;
-    margin: 5rem;
-    font-weight: bolder;
-    border: solid;
-    border-inline-color: black;
-    border-radius: 1rem;
-    width: 50%;
-}
-
 button {
-
     background-color: #560711;
     border: 3px;
     color: white;
