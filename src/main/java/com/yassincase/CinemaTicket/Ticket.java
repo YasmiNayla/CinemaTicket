@@ -2,7 +2,7 @@ package com.yassincase.CinemaTicket;
 
 public class Ticket {
 
-        private int id;
+        private long id;
         private String movieSelect;
         private Integer amount;
         private String firstName;
@@ -13,7 +13,7 @@ public class Ticket {
         public Ticket() {
         }
 
-        public Ticket(String movieSelect, Integer amount, String firstname, String lastname, Integer phone, String email) {
+        public Ticket(long id, String movieSelect, Integer amount, String firstname, String lastname, Integer phone, String email) {
 
             this.id = id;
             this.movieSelect = movieSelect;
@@ -24,7 +24,7 @@ public class Ticket {
             this.email = email;
         }
 
-    public int getId() { return id; }
+        public long getId() { return id; }
 
         public void setId(long id) { this.id = id; }
         public String getMovieSelect() {
@@ -75,7 +75,7 @@ public class Ticket {
             this.email = email;
         }
 
-    @Override
+  /*  @Override
     public String toString() {
         return "Ticket{" +
                 "id='" + id + '\'' +
@@ -87,4 +87,6 @@ public class Ticket {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+   */
 }

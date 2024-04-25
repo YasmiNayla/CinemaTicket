@@ -6,6 +6,7 @@ html {
 /* Picture generated with: "Canva-AI image generator" */
 
 body {
+    color: whitesmoke;
     display: block;
     margin-left: 80px ;
 }
@@ -25,19 +26,13 @@ body {
     position: absolute;
 }
 
-h1 {
-    color: #fccaca;
-    font-size: 44px;
-    border-bottom-style: dashed;
-}
-
-.childForm{
+#childForm{
     position: absolute;
     align-items: center;
 }
 
-.ticketForm {
-    background-color: #132d44;
+#movieTicket {
+    background-color: #0f2334;
     display: list-item;
     text-align: center;
     padding: 2rem;

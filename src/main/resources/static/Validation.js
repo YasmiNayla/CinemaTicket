@@ -1,78 +1,96 @@
-function formatMovieChoice() {
-    let html = '<select id= "movieSelect">'
-    for (const movie of data) {
-        console.log("Movie chosen: " + movie)
-        html += "<option>" + movie.name;
-    }
-    html += "</select>"
-    document.getElementById("movieSelect").innetHTML = html;
-}
-
-//Conditions:
-function movieSelectVal(){
-            const movieChoice =$("#movieSelectVal").val();
-            if(!movieChoice){
-                $("#movieSelect").html("You forgot to choose a movie");
-                return false;
-            }
-            else{
-                $("#movieSelect").html("");
-                return true;
-            }
-        }
-
-function amountVal(amountInput){
-    const amountRegex=/^[0-9]{1,99}$/;
-    if(!amountRegex.test(amountInput.value)){
-        document.getElementById("#amountError").innerText("Amount must be at least 1.");
+function movieVal(){
+    const chosenMovie=$("#movieSelect").val();
+    if(!chosenMovie){
+        $("#movieError").html("Choose a movie!");
         return false;
     }
     else{
-        $("#amountError").html("");
+        $("#movieError").html("");
         return true;
     }
 }
 
-function firstNameVal(firstNameInput){
-    const firstNameRegex = /^[a-zA-Z]+(\s[a-zA-Z]+)?$/;
-    if(!firstNameRegex.test(firstNameInput.value)){
-        document.getElementById("#firstNameError").innerText("Please enter your first name.");
+function amountVal(amount){
+    const regexp=/^[0-9]{1,99}$/;
+    const ok=regexp.test(amount);
+    if(!ok){
+        $("#AmountError").html("How many tickets?");
         return false;
-    } else {
+    }
+    else{
+        $("#AmountError").html("");
+        return true;
+    }
+}
+
+function firstNameVal(firstName){
+    const regexp=/^[a-zæøåA-ZÆØÅ. \-]{1,50}$/;
+    const ok=regexp.test(firstName);
+
+    if(!ok){
+        $("#firstNameError").html("Write your name here.")
+        return false;
+    }
+    else {
         $("#firstNameError").html("");
         return true;
     }
+
 }
 
-function lastNameVal (lastNameInput){
-    const lastNameRegex = /^[a-zA-Z]+(\s[a-zA-Z]+)?$/;
-    if (!lastNameRegex.test(lastNameInput.value)) {
-        document.getElementById("lastNameError").innerText = "Please enter your last name.";
+function lastNameVal(lastName){
+    const regexp=/^[a-zæøåA-ZÆØÅ. \-]{1,50}$/;
+    const ok=regexp.test(lastName);
+
+    if(!ok){
+        $("#lastNameError").html("Write your surname here.")
         return false;
-    } else {
+    }
+    else {
         $("#lastNameError").html("");
         return true;
     }
+
 }
 
-function phoneVal (phoneInput) {
-    const phoneInputRegex = /^\d{8}$/;
-    if (!phoneInputRegex.test(phoneInput.value)) {
-        document.getElementById("phoneError").innerText = "Please enter a valid 8-digit phone number.";
+function phoneVal(phone){
+    const regexp=/^[0-9]{8}$/;
+    const ok=regexp.test(phone);
+
+    if(!ok){
+        $("#phoneError").html("Write a valid (8 digits) phone Nr.")
         return false;
-    } else {
+    }
+    else {
         $("#phoneError").html("");
+        return true;
     }
+
 }
 
-function emailVal (emailInput){
-    const emailInputRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    if (!emailInputRegex.test(emailInput.value)) {
-        document.getElementById("emailInput").innerText = "Please enter a valid email address.";
+function emailVal(email){
+    const regexp=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const ok=regexp.test(email);
+
+    if(!ok){
+        $("#emailError").html("Write a valid email address.")
         return false;
-    } else {
-        $("#emailError").html("");
     }
+    else {
+        $("#emailError").html("");
+        return true;
+    }
+
 }
 
-
+function storeAndValData(){
+    const movieOK=movieVal($("#movieSelect").val());
+    const amountOK=amountVal( $("#amountInput").val());
+    const firstNameOK=firstNameVal($("#firstNameInput").val());
+    const lastNameOK=lastNameVal($("#lastNameInput").val());
+    const phoneOK=phoneVal($("#phoneInput").val());
+    const emailOK=emailVal($("#emailInput").val());
+    if(movieOK && amountOK && firstNameOK && lastNameOK && phoneOK && emailOK){
+        viewAllTickets();
+    }
+}

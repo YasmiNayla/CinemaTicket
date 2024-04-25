@@ -4,12 +4,15 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Oblig3</title>
-    <script src="jquery-3.6.4.min.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script src="index.js"></script>
+    <script src="index2.js"></script>
     <script src="Validation.js"></script>
-    <script src="TicketStore.js"></script>
+
     <link rel="stylesheet" href="styling.css" type="text/css">
+
+
 
 </head>
 
@@ -22,12 +25,15 @@
 
         <div class="childForm">
 
-            <div class="ticketForm">
+            <div class="movieTicket">
 
                 <input type="hidden" id="id">
 
                     <label for="movieSelect">Select Movie:</label><br>
-                    <select id="movieSelect" required onclick="formatMovieChoice()">
+                    <span id="movieError" style="color: rgb(77,5,5)"></span>
+                    <select id="movieSelect" onclick="movieVal()">
+
+                        <option value=" disabled selected"> Choose Movie </option>
                         <option>Ready Player One</option>
                         <option>Avatar I</option>
                         <option>Avatar II</option>
@@ -41,7 +47,8 @@
 
 
                     <label for="amountInput">Amount:</label><br>
-                    <input type="text" id="amountInput" required min="1" onchange="amountVal(this.value)">
+                    <input type="text" id="amountInput" required min="1"
+                           onchange="amountVal(this.value)">
                     <span id="amountError" style="color: rgb(128, 0, 0)"></span><br><br>
 
                     <label for="firstNameInput">First Name:</label><br>
@@ -55,7 +62,8 @@
                     <span id="lastNameError" style="color: rgb(245, 0, 0)"></span><br><br>
 
                     <label for="phoneInput">Phone Nr:</label><br>
-                    <input type="number" id="phoneInput" pattern="[0-9]{10}" required onchange="phoneVal(this.value)">
+                    <input type="number" id="phoneInput" pattern="[0-9]{10}" required
+                           onchange="phoneVal(this.value)">
                     <span id="phoneError" style="color: rgb(255, 71, 71)"></span><br><br>
 
                     <label for="emailInput">Email:</label><br>
@@ -63,17 +71,18 @@
                            onchange="emailVal(this.value)">
                     <span id="emailError" style="color: rgb(255, 112, 112)"></span><br><br>
 
-                    <button type="button" class="buyButton" onclick="valAndSendTicket(); formatData()">Buy Ticket</button>
+                    <button class="buyButton" onclick="storeAndValData()">Buy Ticket</button>
+
         </div>
 
 
             <div class="childForm">
                 <h2>All Tickets</h2>
 
-                <button id="getTicketList" onclick="getAllTickets()">View Tickets</button><br>
+                <button class="viewAllTickets" onclick="viewAllTickets()">View Tickets</button><br>
 
 
-                <button class="removeAllButton" onclick="removeEventListener()">Remove All</button>
+                <button class="deleteAllButton" onclick="removeAllTickets()">Remove All</button>
              </div>
 
     </div>

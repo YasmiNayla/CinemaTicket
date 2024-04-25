@@ -13,10 +13,8 @@ import java.util.ArrayList;
 @RestController
 public class TicketController {
 
- List<Ticket> tickets = new ArrayList<>();
-
     @Autowired
-    private TicketRepository rep;
+    TicketRepository rep;
 
     // A test Endpoint to check if system is working
     @GetMapping("/Hello")
@@ -27,16 +25,10 @@ public class TicketController {
 
     // save a registered ticket purchase into the array of tickets listing
     @PostMapping("/setTicket")
-    public String setTicket(Ticket ticket){
+    public void setTicket(Ticket ticket){
         rep.setTicket(ticket);
-        return "Ticket has been saved";
     }
 
-    @PostMapping("/updateTicket")
-    public String updateStudentDBPost(Ticket ticket){
-        TicketRepository.updateTicket(ticket);
-        return "updated";
-    }
 
     // see all tickets from ticket listing array
     @GetMapping("/getAllTickets")
@@ -44,17 +36,6 @@ public class TicketController {
         return rep.getAllTickets();
     }
 
-    //handpicking a ticket by ID
-    @GetMapping("/getTicketById")
-    public void getTicketById(int id){
-        rep.getTicketById(id);
-    }
-
-    //delete singular and specific ticket by Id
-    @PostMapping("/deleteById")
-    public void deleteById(int id){
-        rep.deleteById(id);
-    }
 
     // delete all tickets
     @DeleteMapping("/deleteAllTickets")

@@ -1,6 +1,6 @@
 //sending to java the updates
 function saveChangesDb(){
-    ediTicket = {
+    Ticket = {
         "id": document.getElementById("idEdit").innerHTML,
         "movie": document.getElementById("movieEdit").value,
         "amount": document.getElementById("amountEdit").value,
@@ -10,7 +10,7 @@ function saveChangesDb(){
         "email": document.getElementById("emailEdit").value
     }
     console.log( document.getElementById("id").value);
-    console.log(ediTicket); //debug advise from Cosmin
+    console.log(Ticket); //debug advise from Cosmin
     $.post("http://localhost:8080/updateTicket",ediTicket, function (data){})
 
 }
