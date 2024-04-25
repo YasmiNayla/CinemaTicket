@@ -49,8 +49,8 @@ function removeAllTickets() {
         getAllTickets();
     })
 }
-function saveChangesDb(){
-    Ticket = {
+function saveChangesDb() {
+    let Ticket = {
         "id": document.getElementById("idEdit").innerHTML,
         "movie": document.getElementById("movieEdit").value,
         "amount": document.getElementById("amountEdit").value,
@@ -59,11 +59,26 @@ function saveChangesDb(){
         "phone": document.getElementById("phoneEdit").value,
         "email": document.getElementById("emailEdit").value
     }
-    console.log( document.getElementById("id").value);
+    console.log(document.getElementById("id").value);
     console.log(Ticket); //debug advise from Cosmin
-    $.post("http://localhost:8080/setTicket",Ticket, function (data){})
-
+    $.post("http://localhost:63342/setTicket", Ticket, function (data) {
+    })
+    $.ajax({
+        type: 'POST',
+        url: "http://localhost:63342/setTicket",
+        async: true,
+        data: JSON.stringify(Ticket),
+        contentType: "application/json",
+        dataType: "json",
+        success: function (result, status, xhr) {
+            console.log(result);
+        },
+        error: function (xhr, status, error) {
+            console.log("Error: " + error);
+        }
+    });
 }
+
 
 /*  left to side to unclutter code...it is written in validation code. in else { blabla
     // Empty input fields
