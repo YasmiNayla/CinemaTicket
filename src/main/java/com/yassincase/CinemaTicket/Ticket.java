@@ -26,7 +26,7 @@ public class Ticket {
 
     public int getId() { return id; }
 
-        public void setId(int id) { this.id = id; }
+        public void setId(long id) { this.id = id; }
         public String getMovieSelect() {
             return movieSelect;
         }
@@ -63,7 +63,7 @@ public class Ticket {
             return phone;
         }
 
-        public void setPhone(Integer phone) {
+        public void setPhone(int phone) {
             this.phone = phone;
         }
 

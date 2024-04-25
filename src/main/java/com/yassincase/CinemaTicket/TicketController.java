@@ -1,6 +1,7 @@
 package com.yassincase.CinemaTicket;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,12 @@ public class TicketController {
         return "Ticket has been saved";
     }
 
+    @PostMapping("/updateTicket")
+    public String updateStudentDBPost(Ticket ticket){
+        TicketRepository.updateTicket(ticket);
+        return "updated";
+    }
+
     // see all tickets from ticket listing array
     @GetMapping("/getAllTickets")
     public List<Ticket> getAllTickets() {
@@ -55,6 +62,3 @@ public class TicketController {
         rep.deleteAllTickets();
     }
  }
-
-@PostMapping("/updateTicket)
-

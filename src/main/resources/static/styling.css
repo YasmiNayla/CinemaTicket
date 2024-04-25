@@ -10,11 +10,12 @@ body {
     margin-left: 80px ;
 }
 
-#title {
+#title, h2, h3 {
     align-items: flex-start;
     backdrop-filter: blur(88);
+    color: #fccaca;
 }
-#ContainerForm {
+.ContainerForm .TicketManipulation{
     font-family: sans-serif;
     font-size: 22px;
     color: whitesmoke;
@@ -35,7 +36,7 @@ h1 {
     align-items: center;
 }
 
-.ticketForm{
+.ticketForm, #ticketForm2 {
     background-color: #132d44;
     display: list-item;
     text-align: center;
@@ -62,3 +63,4 @@ button, #getTicketList {
     margin: 15px 10px;
 
 }
+
