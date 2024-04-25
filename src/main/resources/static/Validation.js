@@ -91,6 +91,7 @@ function storeAndValData(){
     const phoneOK=phoneVal($("#phoneInput").val());
     const emailOK=emailVal($("#emailInput").val());
     if(movieOK && amountOK && firstNameOK && lastNameOK && phoneOK && emailOK){
+        saveChangesDb()
         viewAllTickets();
     }
 }

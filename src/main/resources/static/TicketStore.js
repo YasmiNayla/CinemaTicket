@@ -11,7 +11,7 @@ function saveChangesDb(){
     }
     console.log( document.getElementById("id").value);
     console.log(Ticket); //debug advise from Cosmin
-    $.post("http://localhost:8080/updateTicket",ediTicket, function (data){})
+    $.post("http://localhost:8080/setTicket",Ticket, function (data){})
 
 }
 function updateStudent(id) {

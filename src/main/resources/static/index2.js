@@ -49,7 +49,21 @@ function removeAllTickets() {
         getAllTickets();
     })
 }
+function saveChangesDb(){
+    Ticket = {
+        "id": document.getElementById("idEdit").innerHTML,
+        "movie": document.getElementById("movieEdit").value,
+        "amount": document.getElementById("amountEdit").value,
+        "firstName": document.getElementById("firstNameEdit").value,
+        "lastName": document.getElementById("lastNameEdit").value,
+        "phone": document.getElementById("phoneEdit").value,
+        "email": document.getElementById("emailEdit").value
+    }
+    console.log( document.getElementById("id").value);
+    console.log(Ticket); //debug advise from Cosmin
+    $.post("http://localhost:8080/setTicket",Ticket, function (data){})
 
+}
 
 /*  left to side to unclutter code...it is written in validation code. in else { blabla
     // Empty input fields
