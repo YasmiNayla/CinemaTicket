@@ -63,18 +63,18 @@
                            onchange="emailVal(this.value)">
                     <span id="emailError" style="color: rgb(255, 112, 112)"></span><br><br>
 
-                    <button type="button" class="buyButton" onclick="valAndSendTicket()">Buy Ticket</button>
-            </div>
+                    <button type="button" class="buyButton" onclick="valAndSendTicket(); formatData()">Buy Ticket</button>
+        </div>
 
 
-     <div class="DBTicketsManipulation">
-        <h2>All Tickets</h2>
+            <div class="childForm">
+                <h2>All Tickets</h2>
 
-        <button id="getTicketList" onclick="getAllTickets()">View Tickets</button><br>
+                <button id="getTicketList" onclick="getAllTickets()">View Tickets</button><br>
 
 
-        <button class="removeAllButton" onclick="removeEventListener()">Remove All</button>
-     </div>
+                <button class="removeAllButton" onclick="removeEventListener()">Remove All</button>
+             </div>
 
     </div>
 </div>
